@@ -3,6 +3,7 @@ import { foreachIpc, InvoiceListItem, IpcHandlerFns } from '../common/ipc-types'
 import { getTechnicalConf, updateTechnicalConf } from './filesystem'
 import axios from 'axios'
 import { XMLParser } from 'fast-xml-parser'
+import { getInvoiceIdsUrl } from './efaktura-api'
 
 const handlers: IpcHandlerFns = {
   getTechnicalConf: async () => {
@@ -18,16 +19,13 @@ const handlers: IpcHandlerFns = {
       return []
     }
     for (const status of filter.statusFilter) {
-      const url = new URL('https://efaktura.mfin.gov.rs/api/publicApi/purchase-invoice/ids')
-      url.searchParams.set('status', status)
-      if (technicalConf.invoiceFilter.fromDateFilter !== null) {
-        url.searchParams.set('dateFrom', technicalConf.invoiceFilter.fromDateFilter)
-      }
-      if (technicalConf.invoiceFilter.toDateFilter !== null) {
-        url.searchParams.set('dateTo', technicalConf.invoiceFilter.toDateFilter)
-      }
+      const url = getInvoiceIdsUrl(
+        status,
+        technicalConf.invoiceFilter.fromDateFilter,
+        technicalConf.invoiceFilter.toDateFilter,
+      )
       const response = await axios.post(
-        url.toString(),
+        url,
         '',
         {
           headers: {

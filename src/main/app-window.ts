@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Tray, nativeImage } from 'electron'
 import path from 'path'
 import { registerMainIpc } from './main-ipc'
-import dkLogoDataUrl from '../../assets/images/nef-logo-16x16.png'
+import nefLogoDataUrl from '../../assets/images/nef-logo-16x16.png'
 
 // Electron Forge automatically creates these entry points
 declare const APP_WINDOW_WEBPACK_ENTRY: string
@@ -48,7 +48,7 @@ export async function createAppWindow(): Promise<BrowserWindow> {
   })
 
   // Tray
-  const icon = nativeImage.createFromDataURL(dkLogoDataUrl)
+  const icon = nativeImage.createFromDataURL(nefLogoDataUrl)
   const tray = new Tray(icon)
   tray.setToolTip('NeFaktura')
   tray.on('click', () => {

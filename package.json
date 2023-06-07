@@ -1,7 +1,7 @@
 {
   "name": "ne-faktura",
   "version": "0.1.0",
-  "description": "",
+  "description": "NeFaktura desktop application",
   "main": ".webpack/main",
   "scripts": {
     "start": "cross-env NODE_ENV=development electron-forge start",

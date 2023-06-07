@@ -1,10 +1,10 @@
 import { app, BrowserWindow } from 'electron'
 import { createAppWindow } from './app-window'
-// TODO: import { migrateFilesystem } from './filesystem'
+import { migrateFilesystem } from './filesystem'
 
 export const double = (a: number) => 2*a
 
-// TODO: migrateFilesystem()
+migrateFilesystem()
 
 /** Handle creating/removing shortcuts on Windows when installing/uninstalling. */
 if (require('electron-squirrel-startup')) {

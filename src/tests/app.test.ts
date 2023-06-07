@@ -1,4 +1,4 @@
-import { double } from "../main/app"
+import { double } from '../main/app'
 
 describe('app', () => {
   it('basic', () => {

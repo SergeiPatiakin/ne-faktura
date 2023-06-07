@@ -7,7 +7,7 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
 // Say something
-console.log('[Dobkapapp] : Renderer execution started')
+console.log('[NeFaktura] : Renderer execution started')
 
 // Render application in DOM
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

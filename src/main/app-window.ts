@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Tray, nativeImage } from 'electron'
 import path from 'path'
-// TODO: import { registerMainIpc } from './main-ipc'
+import { registerMainIpc } from './main-ipc'
 import dkLogoDataUrl from '../../assets/images/nef-logo-16x16.png'
 
 // Electron Forge automatically creates these entry points
@@ -38,8 +38,8 @@ export async function createAppWindow(): Promise<BrowserWindow> {
   // Show window when its ready to
   appWindow.on('ready-to-show', () => appWindow.show())
 
-  // TODO: Register Inter Process Communication for main process
-  // registerMainIpc(appWindow)
+  // Register Inter Process Communication for main process
+  registerMainIpc(appWindow)
 
   // Close all windows when main window is closed
   appWindow.on('close', () => {

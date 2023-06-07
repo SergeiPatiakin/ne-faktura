@@ -30,18 +30,6 @@ module.exports = {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
     },
-    {
-      // The deb target builds .deb packages, which are the standard package format for Debian-based
-      // Linux distributions such as Ubuntu.
-      name: '@electron-forge/maker-deb',
-      config: {},
-    },
-    {
-      // The RPM target builds .rpm files, which is the standard package format for
-      // RedHat-based Linux distributions such as Fedora.
-      name: '@electron-forge/maker-rpm',
-      config: {},
-    },
   ],
   // Forge Plugins
   plugins: [

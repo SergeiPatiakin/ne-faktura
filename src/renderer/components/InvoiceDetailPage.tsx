@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, CircularProgress, Container, CssBaseline, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link, Stack, TextField } from '@mui/material'
+import { Button, ButtonGroup, CircularProgress, Container, CssBaseline, Dialog, DialogActions, DialogContent, DialogTitle, Link, Stack, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { fireAndForget } from '../../common/helpers'
 import { InvoiceDetail } from '../../common/ipc-types'

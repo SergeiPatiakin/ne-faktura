@@ -1,4 +1,5 @@
-import { BrowserWindow, ipcMain } from 'electron'
+import fs from 'fs'
+import { BrowserWindow, dialog, ipcMain } from 'electron'
 import { foreachIpc, InvoiceListItem, IpcHandlerFns } from '../common/ipc-types'
 import { getTechnicalConf, updateTechnicalConf } from './filesystem'
 import axios from 'axios'
@@ -67,6 +68,29 @@ const handlers: IpcHandlerFns = {
       paymentAccount: document['env:DocumentEnvelope']['env:DocumentBody']['Invoice']['cac:PaymentMeans']['cac:PayeeFinancialAccount']['cbc:ID'],
     }
     return invoiceDetail
+  },
+  downloadInvoiceFile: async ({ arg: invoiceId, browserWindow }) => {
+    const r = await dialog.showSaveDialog(browserWindow, {
+      defaultPath: `${invoiceId}.pdf`
+    })
+    if (!r.canceled && r.filePath) {
+      const technicalConf = getTechnicalConf()
+      const url = new URL(`https://efaktura.mfin.gov.rs/api/publicApi/purchase-invoice/xml?invoiceId=${invoiceId}`)
+      const response = await axios.get(
+        url.toString(),
+        {
+          headers: {
+            Accept: 'text/plain',
+            ApiKey: technicalConf.apiKey,
+          },
+        }
+      )
+      const parser = new XMLParser({ ignoreAttributes: false, parseTagValue: false })
+      const document = parser.parse(response.data)
+      const invoiceFileContentB64 = document['env:DocumentEnvelope']['env:DocumentHeader']['env:DocumentPdf']['#text']
+      const invoiceFileContent = Buffer.from(invoiceFileContentB64, 'base64')
+      fs.writeFileSync(r.filePath, invoiceFileContent)
+    }
   },
   respondToInvoice: async ({ arg: invoiceResponse }) => {
     const technicalConf = getTechnicalConf()

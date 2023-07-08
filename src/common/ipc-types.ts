@@ -48,6 +48,8 @@ export type GetInvoices = IpcTypeDef<'get-invoices', InvoiceFilter, Array<Invoic
 
 export type GetInvoiceDetail = IpcTypeDef<'get-invoice-detail', number, InvoiceDetail>
 
+export type DownloadInvoiceFile = IpcTypeDef<'download-invoice-file', number, void>
+
 export type RespondToInvoice = IpcTypeDef<'respond-to-invoice', InvoiceResponse, void>
 
 export type IpcMethods = {
@@ -55,6 +57,7 @@ export type IpcMethods = {
   updateTechnicalConf: UpdateTechnicalConf
   getInvoices: GetInvoices
   getInvoiceDetail: GetInvoiceDetail
+  downloadInvoiceFile: DownloadInvoiceFile
   respondToInvoice: RespondToInvoice
 }
 
@@ -67,6 +70,7 @@ const ipcNames: IpcNames = {
   updateTechnicalConf: 'update-technical-conf',
   getInvoices: 'get-invoices',
   getInvoiceDetail: 'get-invoice-detail',
+  downloadInvoiceFile: 'download-invoice-file',
   respondToInvoice: 'respond-to-invoice',
 }
 

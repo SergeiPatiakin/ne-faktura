@@ -86,6 +86,13 @@ export const InvoiceDetailPage = (props: Props) => {
         >
           Reject...
         </Button>
+        <Button
+          onClick={async () => {
+            await ipcContextApi.downloadInvoiceFile(props.invoiceId)
+          }}
+        >
+          Download
+        </Button>
         {acceptDialogState.visible &&
           <Dialog
             open
